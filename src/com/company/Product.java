@@ -57,4 +57,15 @@ public class Product {
     public void setCurrency(String currency) {
         this.currency = currency;
     }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "code=" + code +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", type='" + type + '\'' +
+                ", currency='" + currency + '\'' +
+                '}';
+    }
 }
