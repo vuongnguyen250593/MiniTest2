@@ -1,16 +1,25 @@
 package minitest2;
 
 public class Human {
+    public static int VALUE = 0;
+    private int id;
     private String name;
     private int age;
-    private int id;
+
+    public Human(String name, int age) {
+        this.id = ++VALUE;
+        this.name = name;
+        this.age = age;
+    }
 
     public Human() {
     }
 
-    public Human(String name, int age, int id) {
-        this.name = name;
-        this.age = age;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -30,20 +39,12 @@ public class Human {
         this.age = age;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     @Override
     public String toString() {
         return "Human{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", age=" + age +
-                ", id=" + id +
                 '}';
     }
 }

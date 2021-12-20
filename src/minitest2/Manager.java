@@ -1,17 +1,17 @@
 package minitest2;
 
 public interface Manager {
-    void displayAllStudent();
-    void displayAddStudent();
+    void displayAll();
 
-    void displayAddStudent(Student student);
+    void addHuman(Human human);
 
-    void displaySearchStudent();
+    Human searchById(int id);
 
-    void displaySearchStudent(String name);
+    Human deleteById(int id);
 
-    void displayDeleteStudent();
-    void displayEditStudent();
-    void displaySortStudent();
-    void displayTotalScore();
+    Human updateById(int id);
+
+    void sortByAveragePoint();
+
+    double totalAveragePoint();
 }
