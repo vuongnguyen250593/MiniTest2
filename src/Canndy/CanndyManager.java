@@ -85,6 +85,10 @@ public class CanndyManager {
     }
 
     public void totalPrice() {
-
+        double total = 0;
+        for (int i = 0; i < canndies.size(); i++) {
+            total = total + canndies.get(i).getPrice() * canndies.get(i).getAmount();
+        }
+        System.out.println("Total price = " + total);
     }
 }
