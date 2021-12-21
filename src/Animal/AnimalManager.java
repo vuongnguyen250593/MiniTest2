@@ -3,6 +3,7 @@ package Animal;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class AnimalManager {
@@ -16,26 +17,47 @@ public class AnimalManager {
         this.animals = animals;
     }
 
-    public void addAnimal(Animal animal) {
+    public void addAnimal() {
+        System.out.print("Enter name: ");
+        String name = scanner.nextLine();
+        System.out.print("Enter age: ");
+        int age = scanner.nextInt();
+        System.out.print("Enter weight: ");
+        double weight = scanner.nextDouble();
+        Animal animal = new Animal(name,age,weight);
         animals.add(animal);
-        System.out.println(animals);
     }
 
-    public void deleteByName(String name) {
-        animals.remove(name);
-
+    public void deleteByName() {
+        System.out.print("Search: ");
+        String search = scanner.nextLine();
+        scanner.nextLine();
+        for (int i = 0; i < animals.size(); i++) {
+            if(animals.get(i).getName().equals(search)) {
+                animals.remove(animals.get(i));
+                System.out.println(animals);
+            }
+        }
     }
 
     public void editByName(String name) {
 
     }
 
-    public void searchByName(String name) {
+    public void searchByName() {
+        System.out.print("Search: ");
+        String search = scanner.nextLine();
+        scanner.nextLine();
+        for (Animal animal:animals) {
+            if (animal.getName().equals(search)) {
+                System.out.println(animal);
+            }
 
+        }
     }
 
     public void displayAll() {
-
+        System.out.println(animals);
     }
 
     public void displayDog() {
@@ -43,18 +65,11 @@ public class AnimalManager {
     }
 
     public void displayByWeight() {
-
-    }
-
-    public void createAnimal(Scanner scanner, AnimalManager animalManager) {
-        System.out.print("Enter name: ");
-        String name = scanner.nextLine();
-        scanner.nextLine();
-        System.out.print("Enter age: ");
-        int age = scanner.nextInt();
         System.out.print("Enter weight: ");
         double weight = scanner.nextDouble();
-        Animal animal = new Animal(name,age,weight);
-        animalManager.addAnimal(animal);
+        for (Animal animal: animals) {
+
+        }
     }
+
 }
