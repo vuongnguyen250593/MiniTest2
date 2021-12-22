@@ -1,9 +1,6 @@
-package Animal;
+package animal;
 
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class AnimalManager {

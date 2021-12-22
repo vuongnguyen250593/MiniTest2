@@ -1,4 +1,4 @@
-package Animal;
+package animal;
 
 public class Cat extends Animal implements AnimalAction{
     private String hunt;

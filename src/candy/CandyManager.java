@@ -1,4 +1,4 @@
-package Candy;
+package candy;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -119,7 +119,7 @@ public class CandyManager {
     public void totalPrice() {
         double total = 0;
         for (int i = 0; i < candies.size(); i++) {
-            System.out.println("Candy " + i + ": " + candies.get(i).getPrice() * candies.get(i).getAmount() + " $ ");
+            System.out.println("candy " + i + ": " + candies.get(i).getPrice() * candies.get(i).getAmount() + " $ ");
             total = total + candies.get(i).getPrice() * candies.get(i).getAmount();
         }
         System.out.println("Total price = " + total);

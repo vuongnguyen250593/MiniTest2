@@ -96,7 +96,7 @@ public class HumanManager {
     }
 
     public void searchByName() {
-        System.out.println("Enter name that you want to delete: ");
+        System.out.println("Enter name that you want to search: ");
         String name = scanner.nextLine();
         scanner.nextLine();
         for (int i = 0; i < humans.size(); i++) {

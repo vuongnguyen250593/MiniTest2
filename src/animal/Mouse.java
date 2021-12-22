@@ -1,4 +1,4 @@
-package Animal;
+package animal;
 
 public class Mouse extends Animal implements AnimalAction{
     private String troll;

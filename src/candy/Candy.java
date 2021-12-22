@@ -1,4 +1,4 @@
-package Candy;
+package candy;
 
 public class Candy {
 //    public static int value = 0;

@@ -1,4 +1,4 @@
-package Candy;
+package candy;
 
 import java.util.Scanner;
 
