@@ -20,6 +20,7 @@ public class AnimalManager {
     public void addAnimal() {
         System.out.print("Enter name: ");
         String name = scanner.nextLine();
+        scanner.nextLine();
         System.out.print("Enter age: ");
         int age = scanner.nextInt();
         System.out.print("Enter weight: ");

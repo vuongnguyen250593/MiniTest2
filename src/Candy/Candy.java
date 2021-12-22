@@ -1,38 +1,38 @@
-package Canndy;
+package Candy;
 
-public class Canndy {
-    public static int value = 0;
+public class Candy {
+//    public static int value = 0;
     private int id;
     private String color;
     private String property;
     private int amount;
     private double price;
 
-    public Canndy() {
+    public Candy() {
     }
 
-    public Canndy(int id, String color, String property, int amount, double price) {
-        this.id = ++value;
+    public Candy(int id, String color, String property, int amount, double price) {
+        this.id = id;
         this.color = color;
         this.property = property;
         this.amount = amount;
         this.price = price;
     }
 
-    public Canndy(String color, String property, int amount, double price) {
+    public Candy(String color, String property, int amount, double price) {
         this.color = color;
         this.property = property;
         this.amount = amount;
         this.price = price;
     }
 
-    public static int getValue() {
-        return value;
-    }
-
-    public static void setValue(int value) {
-        Canndy.value = value;
-    }
+//    public static int getValue() {
+//        return value;
+//    }
+//
+//    public static void setValue(int value) {
+//        Candy.value = value;
+//    }
 
     public int getId() {
         return id;
