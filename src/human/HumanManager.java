@@ -67,6 +67,9 @@ public class HumanManager {
                 humans.remove(humans.get(i));
             }
         }
+        for (Human human: humans) {
+            System.out.println(human);
+        }
     }
 
     public void updateByName() {
@@ -83,9 +86,12 @@ public class HumanManager {
                 System.out.print("Enter Address: ");
                 String address = scanner.nextLine();
                 scanner.nextLine();
-                Human newHuman = new Human(name,age,gender,address);
+                Human newHuman = new Human(name, age, gender, address);
                 humans.set(i,newHuman);
             }
+        }
+        for (Human human: humans) {
+            System.out.println(human);
         }
     }
 
