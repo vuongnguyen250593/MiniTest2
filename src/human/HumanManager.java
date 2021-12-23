@@ -72,6 +72,7 @@ public class HumanManager {
         }
     }
 
+
     public void updateByName() {
         System.out.println("Enter name that you want to update: ");
         String name = scanner.nextLine();
