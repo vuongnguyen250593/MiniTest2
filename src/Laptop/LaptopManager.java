@@ -3,6 +3,7 @@ package Laptop;
 import human.Human;
 import javafx.scene.control.Label;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -117,6 +118,18 @@ public class LaptopManager {
         return laptop;
     }
 
+    public ArrayList<Laptop> displayByBrand(String brand) {
+        ArrayList<Laptop> laptopBrand = new ArrayList<>();
+        Laptop laptop = null;
+        for (Laptop l: laptops) {
+            if (l.getBrand().equalsIgnoreCase(brand)) {
+                laptop = l;
+                laptopBrand.add(laptop);
+            }
+        }
+        return laptopBrand;
+    }
+
     public ArrayList<Laptop> searchByColor(String color) {
         ArrayList<Laptop> laptopColor = new ArrayList<>();
         for (Laptop l: laptops) {
@@ -125,5 +138,31 @@ public class LaptopManager {
             }
         }
         return laptopColor;
+    }
+
+    public static void writeToFile(String path, List<Laptop> laptops) {
+        try {
+            FileOutputStream fos = new FileOutputStream(path);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(laptops);
+            oos.close();
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static ArrayList<Laptop> readDataFromFile(String path) {
+        ArrayList<Laptop> laptops = new ArrayList<>();
+        try {
+            FileInputStream fis = new FileInputStream(path);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            laptops = (ArrayList<Laptop>) ois.readObject();
+            fis.close();
+            ois.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return laptops;
     }
 }

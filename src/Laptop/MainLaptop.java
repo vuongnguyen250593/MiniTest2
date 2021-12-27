@@ -18,8 +18,10 @@ public class MainLaptop {
             System.out.println("4. Display all Laptop");
             System.out.println("5. Search by Brand");
             System.out.println("6. Search by Price");
-            System.out.println("7. ");
+            System.out.println("7. Display by Brand");
             System.out.println("8. Search by Color");
+            System.out.println("9. Write to file");
+            System.out.println("10. Read data from file");
             System.out.println("0. Exit");
             System.out.println("---------------");
             System.out.print("Enter your choice: ");
@@ -41,6 +43,7 @@ public class MainLaptop {
                     System.out.println("3. Delete a Laptop by ID");
                     int deleteId;
                     boolean check = false;
+//                    chưa xủ lí đc việc nhập lại khi nhập sai kiểu dữ liệu
                     do {
                         System.out.print("Enter ID that you want to delete: ");
                         deleteId = scanner.nextInt();
@@ -48,7 +51,6 @@ public class MainLaptop {
                             System.out.println("Delete successfully");
                             check = true;
                         } catch (Exception e) {
-                            System.err.println(e.getMessage());
                             System.err.println("The ID is not existence or error. Please re-enter!");
                             check = false;
                         }
@@ -79,7 +81,14 @@ public class MainLaptop {
                     laptopArrayList2.forEach(System.out::println);
                     break;
                 case 7:
-                    System.out.println("7. ");
+                    System.out.println("7. Display by Brand");
+                    System.out.println("5. Search by Brand");
+                    scanner.nextLine();
+                    System.out.print("Enter Brand that you want to search: ");
+                    String searchBrand1 = scanner.nextLine();
+                    scanner.nextLine();
+                    ArrayList<Laptop> laptopArrayList4 = laptopManager.searchByBrand(searchBrand1);
+                    laptopArrayList4.forEach(System.out::println);
                     break;
                 case 8:
                     System.out.println("8. Search by Color");
@@ -88,6 +97,12 @@ public class MainLaptop {
                     scanner.nextLine();
                     ArrayList<Laptop> laptopArrayList3 = laptopManager.searchByColor(searchColor);
                     laptopArrayList3.forEach(System.out::println);
+                    break;
+                case 9:
+                    System.out.println("9. Write to file");
+                    break;
+                case 10:
+                    System.out.println("10. Read data from file");
                     break;
             }
         } while (choice != 0);
