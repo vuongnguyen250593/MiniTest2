@@ -96,8 +96,22 @@ public class CandyManager {
     }
 
     public void searchByColor() {
-        System.out.print("Enter Color that you want to search: ");
-        String color = scanner.nextLine();
+        boolean check;
+        String color;
+        do {
+            System.out.print("Enter Color that you want to search: ");
+            color = scanner.nextLine();
+            check = false;
+            try {
+                System.out.println("hiện thị ra kết quả");
+                check = true;
+            } catch (Exception e) {
+                System.err.println("nhập sai dữ liệu");
+                check = false;
+            }
+        } while (check != true);
+
+
         scanner.nextLine();
         for (int i = 0; i < candies.size(); i++) {
             if (candies.get(i).getColor().equals(color)) {

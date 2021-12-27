@@ -84,12 +84,13 @@ public class StudentManager {
 
     public void maxScore() {
         double max = students.get(0).getMathScore() + students.get(0).getPhysicalScore() + students.get(0).getChemistryScore();
-        int i;
-        for (i = 0; i < students.size(); i++) {
+        int index = 0;
+        for (int i = 0; i < students.size(); i++) {
             if (students.get(i).getMathScore() + students.get(i).getPhysicalScore() + students.get(i).getChemistryScore() > max) {
                 max = students.get(i).getMathScore() + students.get(i).getPhysicalScore() + students.get(i).getChemistryScore();
+                index = i;
             }
         }
-        System.out.println(students.get(i));
+        System.out.println(students.get(index));
     }
 }
