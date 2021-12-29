@@ -140,7 +140,7 @@ public class LaptopManager {
         return laptopColor;
     }
 
-    public static void writeToFile(String path, List<Laptop> laptops) {
+    public static void writeToFile(String path, ArrayList<Laptop> laptops) {
         try {
             FileOutputStream fos = new FileOutputStream(path);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
