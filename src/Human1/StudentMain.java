@@ -1,68 +1,63 @@
 package Human1;
 
-import Person.StudentManager;
+
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class StudentMain {
     public static void main(String[] args) {
-        StudentManager studentManager = new StudentManager();
         Scanner scanner = new Scanner(System.in);
+        StudentManager studentManager = new StudentManager();
 
         int choice;
         do {
-            System.out.println("---------------");
-            System.out.println("*******  Menu  *******");
-            System.out.println("1. Add a Student");
-            System.out.println("2. Delete a Student by Name");
-            System.out.println("3. Update a Student by Name");
-            System.out.println("4. Display all Student");
-            System.out.println("5. Display all Student with Average Score is greater than 7,5");
-            System.out.println("6. Display all Student with: Name - Average Score - Rating");
-            System.out.println("7. Write to File");
-            System.out.println("8. Read from a File");
+            System.out.println("-----MENU-----");
+            System.out.println("1. Add student");
+            System.out.println("2. Update student by name");
+            System.out.println("3. Delete student by name");
+            System.out.println("4. Display students");
+            System.out.println("5. Display students have Average greater than 7.5");
+            System.out.println("6. Display students in format");
+            System.out.println("7. Write to file");
+            System.out.println("8. Read from a file");
             System.out.println("0. Exit");
-            System.out.println("---------------");
-            System.out.println("Enter your choice");
+            System.out.println("Input your choice: ");
             choice = scanner.nextInt();
             switch (choice) {
                 case 1:
-                    System.out.println("1. Add a Student");
-                    Student student = studentManager.createStudent();
-                    studentManager.addStudent(student);
+                    studentManager.addStudent();
                     break;
                 case 2:
-                    System.out.println("2. Delete a Student by Name");
-                    System.out.print("Enter name that you want to delete: ");
-                    String deleteName = scanner.nextLine();
+                    System.out.println("Input edit name: ");
                     scanner.nextLine();
-                    System.out.println(studentManager.deleteByName(deleteName));
+                    String editName = scanner.nextLine();
+                    System.out.println(studentManager.editStudent(editName));
                     break;
                 case 3:
-                    System.out.println("3. Update a Student by Name");
-                    System.out.print("Enter name that you want to update: ");
-                    String updateName = scanner.nextLine();
+                    System.out.println("Input delete name: ");
                     scanner.nextLine();
-                    System.out.println(studentManager.updateByName(updateName));
+                    String deleteName = scanner.nextLine();
+                    System.out.println(studentManager.deleteStudent(deleteName));
                     break;
                 case 4:
-                    System.out.println("4. Display all Student");
-                    studentManager.displayAllStudent();
+                    System.out.println("All Students: ");
+                    studentManager.displayAll();
                     break;
                 case 5:
-                    System.out.println("5. Display all Student with Average Score is greater than 7,5");
-                    ArrayList<Student> students = studentManager.displayAverageScoreGreaterThan75();
-                    students.forEach(System.out::println);
+                    System.out.println("All Students By Average: ");
+                    studentManager.displayStudentByAverage();
                     break;
                 case 6:
-                    System.out.println("6. Display all Student with: Name - Average Score - Rating");
+                    System.out.println("All Students In Format: ");
+                    studentManager.displayStudentFormat();
                     break;
                 case 7:
-                    System.out.println("7. Write to File");
+                    studentManager.writeFile(studentManager.getStudents(), StudentManager.PATH_NAME);
                     break;
                 case 8:
-                    System.out.println("8. Read from a File");
+                    ArrayList<Student> students = studentManager.readFile(StudentManager.PATH_NAME);
+                    students.forEach(System.out::println);
                     break;
             }
         } while (choice != 0);

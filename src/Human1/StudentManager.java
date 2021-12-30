@@ -7,106 +7,189 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class StudentManager {
-    ArrayList<Student> students = new ArrayList<>();
-    Scanner scanner = new Scanner(System.in);
+    public static final String PATH_NAME = "src/Human1/students.csv";
+    private final ArrayList<Student> students;
+    private final Scanner scanner = new Scanner(System.in);
 
-    public Student createStudent() {
-        scanner.nextLine();
-        System.out.print("Enter Name: ");
+    public StudentManager() {
+        this.students = readFile(PATH_NAME);
+    }
+
+    public ArrayList<Student> getStudents() {
+        return students;
+    }
+
+    public boolean checkAgeAndAverage(int age, double average) {
+        return (age >= 18 && age <= 60 && !(average < 0) && !(average > 10));
+    }
+
+    public String getGenderByChoice(int choice) {
+        String gender = "";
+        switch (choice) {
+            case 1:
+                gender = "Male";
+                break;
+            case 2:
+                gender = "Female";
+                break;
+            case 3:
+                gender = "Other";
+                break;
+        }
+        return gender;
+    }
+
+    public void addStudent() {
+        System.out.println("Input name: ");
         String name = scanner.nextLine();
-        scanner.nextLine();
-        System.out.print("Enter Age: ");
+        System.out.println("Input age: ");
         int age = scanner.nextInt();
-        System.out.print("Enter Gender: ");
-        String gender = scanner.nextLine();
         scanner.nextLine();
-        System.out.print("Enter Address: ");
+        System.out.println("Input choice gender: ");
+        System.out.println("1. Male");
+        System.out.println("2. Female");
+        System.out.println("3. Other");
+        System.out.println("Input your choice: ");
+        int gender = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Input address: ");
         String address = scanner.nextLine();
+        System.out.println("Input average: ");
+        double average = scanner.nextDouble();
         scanner.nextLine();
-        System.out.print("Enter Average Score: ");
-        double averageScore = scanner.nextDouble();
-        return new Student(name, age, gender, address, averageScore);
+        if (checkAgeAndAverage(age, average) && !getGenderByChoice(gender).equals("")) {
+            students.add(new Student(name, age, getGenderByChoice(gender), address, average));
+            writeFile(students, PATH_NAME);
+            System.out.println("Add student have name = " + name + " successfully!");
+        } else {
+            System.out.println("Data entry error, please check again!!!");
+        }
     }
 
-    public void addStuden(Student student) {
-        students.add(student);
-    }
-
-    public Student deleteByName(String name) {
-        Student student = null;
-        for (Student s: students) {
-            if (s.getName().equalsIgnoreCase(name)) {
-                student = s;
+    public Student editStudent(String name) {
+        Student editStudent = null;
+        for (Student student : students) {
+            if (student.getName().equals(name)) {
+                editStudent = student;
             }
         }
-        students.remove(student);
-        return student;
-    }
-
-    public Student updateStudentByName(String name) {
-        Student student = null;
-        for (Student s: students) {
-            if (s.getName().equalsIgnoreCase(name)) {
-                student = s;
-            }
-        }
-        if (student != null) {
-            int index = students.indexOf(student);
-            System.out.print("Enter Age: ");
-            int age = scanner.nextInt();
-            student.setAge(age);
-            System.out.print("Enter Gender: ");
-            String gender = scanner.nextLine();
-            student.setGender(gender);
+        if (editStudent != null) {
+            int index = students.indexOf(editStudent);
+            System.out.println("Input new name: ");
+            editStudent.setName(scanner.nextLine());
+            System.out.println("Input new age: ");
+            editStudent.setAge(scanner.nextInt());
             scanner.nextLine();
-            System.out.print("Enter Address: ");
-            String address = scanner.nextLine();
-            student.setAddress(address);
+            System.out.println("Input new gender: ");
+            System.out.println("1. Male");
+            System.out.println("2. Female");
+            System.out.println("3. Other");
+            System.out.println("Input your choice: ");
+            int gender = scanner.nextInt();
             scanner.nextLine();
-            System.out.print("Enter Average Score: ");
-            double averageScore = scanner.nextDouble();
-            student.setAverageScore(averageScore);
-            students.set(index,student);
-        }
-        return student;
-    }
-
-    public void displayAllStudent() {
-        for (Student s: students) {
-            System.out.println(s);
-        }
-    }
-
-    public ArrayList<Student> displayAverageScoreGreaterThan75() {
-        ArrayList<Student> student = new ArrayList<>();
-        for (Student s: students) {
-            if (s.getAverageScore() >= 7.5) {
-                student.add(s);
+            System.out.println("Input new address: ");
+            editStudent.setAddress(scanner.nextLine());
+            System.out.println("Input new average: ");
+            editStudent.setAverage(scanner.nextDouble());
+            scanner.nextLine();
+            if (checkAgeAndAverage(editStudent.getAge(), editStudent.getAverage()) && !getGenderByChoice(gender).equals("")) {
+                editStudent.setGender(getGenderByChoice(gender));
+                students.set(index, editStudent);
+                writeFile(students, PATH_NAME);
+                System.out.println("Update student have name = " + name + " successfully!");
+            } else {
+                System.out.println("Data entry error, please check again!!!");
             }
         }
-        return student;
+        return editStudent;
     }
 
-    public static void writeToFile(String path, ArrayList<Student> students) {
+    public Student deleteStudent(String name) {
+        Student editStudent = null;
+        for (Student student : students) {
+            if (student.getName().equals(name)) {
+                editStudent = student;
+            }
+        }
+        if (editStudent != null) {
+            students.remove(editStudent);
+            writeFile(students, PATH_NAME);
+            System.out.println("Delete student have name = " + name + " successfully!");
+        }
+        return editStudent;
+    }
+
+    public void displayAll() {
+        if (students.isEmpty()) {
+            System.out.println("List students is Empty!");
+            return;
+        }
+        for (Student student : students) {
+            System.out.println(student);
+        }
+    }
+
+    public void displayStudentByAverage() {
+        if (students.isEmpty()) {
+            System.out.println("List students is Empty!");
+            return;
+        }
+        for (Student student : students) {
+            if (student.getAverage() > 7.5) {
+                System.out.println(student);
+            }
+        }
+    }
+
+    public void displayStudentFormat() {
+        if (students.isEmpty()) {
+            System.out.println("List students is Empty!");
+            return;
+        }
+        for (Student student : students) {
+            if (student.getAverage() > 8.0) {
+                System.out.println(student.getName() + " - " + student.getAverage() + " - " + "Good");
+            } else if (student.getAverage() > 6.0) {
+                System.out.println(student.getName() + " - " + student.getAverage() + " - " + "Pretty");
+            } else if (student.getAverage() > 4.0) {
+                System.out.println(student.getName() + " - " + student.getAverage() + " - " + "Normal");
+            } else {
+                System.out.println(student.getName() + " - " + student.getAverage() + " - " + "Weak");
+            }
+        }
+    }
+
+    public void writeFile(ArrayList<Student> students, String path) {
         try {
-            FileOutputStream fos = new FileOutputStream(path);
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(students);
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path));
+            for (Student student : students) {
+                bufferedWriter.write(student.getName() + "," + student.getAge() + ","
+                        + student.getGender() + "," + student.getAddress() + "," + student.getAverage() +"\n");
+            }
+            bufferedWriter.close();
+            System.out.println("Write file successfully!");
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println(e.getMessage());
         }
     }
 
-    public static ArrayList<Student> readDataFromFile(String path) {
+    public ArrayList<Student> readFile(String path) {
         ArrayList<Student> students = new ArrayList<>();
+        File file = new File(PATH_NAME);
+
         try {
-            FileInputStream fis = new FileInputStream(path);
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            students = (ArrayList<Student>) ois.readObject();
-            fis.close();
-            ois.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                String[] strings = line.split(",");
+                students.add(new Student(strings[0], Integer.parseInt(strings[1]), strings[2], strings[3], Double.parseDouble(strings[4])));
+            }
+
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
         }
         return students;
     }

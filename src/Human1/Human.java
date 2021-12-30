@@ -6,14 +6,14 @@ public class Human {
     private String gender;
     private String address;
 
-    public Human() {
-    }
-
     public Human(String name, int age, String gender, String address) {
         this.name = name;
         this.age = age;
         this.gender = gender;
         this.address = address;
+    }
+
+    public Human() {
     }
 
     public String getName() {

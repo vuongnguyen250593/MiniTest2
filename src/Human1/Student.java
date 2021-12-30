@@ -1,29 +1,36 @@
 package Human1;
 
 public class Student extends Human{
-    private double averageScore;
+    private double average;
 
-    public Student(double averageScore) {
-        this.averageScore = averageScore;
-    }
-
-    public Student(String name, int age, String gender, String address, double averageScore) {
+    public Student(String name, int age, String gender, String address) {
         super(name, age, gender, address);
-        this.averageScore = averageScore;
     }
 
-    public double getAverageScore() {
-        return averageScore;
+    public Student(String name, int age, String gender, String address, double average) {
+        super(name, age, gender, address);
+        this.average = average;
     }
 
-    public void setAverageScore(double averageScore) {
-        this.averageScore = averageScore;
+    public Student() {
+    }
+
+    public double getAverage() {
+        return average;
+    }
+
+    public void setAverage(double average) {
+        this.average = average;
     }
 
     @Override
     public String toString() {
         return "Student{" +
-                "averageScore=" + averageScore +
+                "name='" + super.getName() + '\'' +
+                ", age=" + super.getAge() +
+                ", gender='" + super.getGender() + '\'' +
+                ", address='" + super.getAddress() + '\'' +
+                ", average=" + average +
                 '}';
     }
 }
